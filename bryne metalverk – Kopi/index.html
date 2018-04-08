@@ -43,7 +43,6 @@
           </select>
           
               <input type="button" value="Save to LS" onclick="dataSave()">
-              <input type="button" value="Clear LS" onclick="clearLS()">
 
         </div>
 
@@ -63,22 +62,7 @@
       </div>
     </div>
 
-    <div>
-      <table id="table" border="1">
-  <thead>
-  <tr>
-    <th>Navn</th>
-      <th>Figur</th>
-      <th>Størrelse</th>
-      <th>Metall</th>
-  </tr>
-  </thead>
-  <!-- tbody som man kan skrive ut deler av tabellen via js -->
-  <tbody id="matchData">
-  
-  </tbody>
-</table>
-    </div>
+
 
 
 
@@ -197,11 +181,8 @@
       
       
       
-    //Stig
-  function clearLS (){
-     localStorage.clear();
-     alert("Slettet localstorage");
-  }
+
+
 
   //STIG
   //Informasjon
@@ -209,17 +190,28 @@
   var navn = document.getElementById("input_kunde");
   var størrelse = document.getElementById("input_størrelse");
   var metall = document.getElementById("input_metall");
+  var total_pris = 5;
   // var figur satt i funksjone over
 
-  //Storage array
-  var bestillinger = [];
-  var add_bestillinger = [];
+  
+  
+  //Stig
+  //se om array er tomt eller ei
+  var bestillinger = JSON.parse(localStorage.getItem("bestillinger"));
+    //Stig
+   if(bestillinger == null){
+    var bestillinger = [];
+  } else {
+    var bestillinger = JSON.parse(localStorage.getItem("bestillinger"));
+  }
   // Stig
+    //Storage array
   function jsonStructure(navn,størrelse,metall,figur){
     this.navn = navn;
     this.størrelse = størrelse;
     this.metall = metall;
     this.figur = figur;
+    this.total_pris = total_pris;
   }
 
   //Se at all informasjonen er fullt inn
@@ -228,7 +220,7 @@
     var isNull = navn.value != "" && størrelse.value != "" && metall.value != "" && figur.value != "";
     if(isNull){
       //legg til informasjonen i StorageArrayet og til localstorage
-      var obj = new jsonStructure(navn.value, størrelse.value, metall.value, figur);
+      var obj = new jsonStructure(navn.value, størrelse.value, metall.value, figur, total_pris);
       bestillinger.push(obj);
       
       localStorage.setItem('bestillinger', JSON.stringify(bestillinger));
