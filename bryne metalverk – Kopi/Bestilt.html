@@ -11,7 +11,7 @@
       	
         <ul>
           <li><a href="index.html" >Index</a></li>
-          <li><a href="bestilt.html">Bestilt</a></li>
+          <li><a href="test.html">Test</a></li>
           <li><a>Home3</a></li>
           <li style="float:right"><a id="cart">Shopping Cart</a></li>
         </ul>
@@ -28,14 +28,17 @@
 
         </div>
         	<div>
-        		<input type="button" value="Clear LS" onclick="clearLS()">
+        		
       <table id="table" border="1">
   <thead>
   <tr>
+  	<th>Id</th>
     <th>Navn</th>
-      <th>Figur</th>
-      <th>Størrelse</th>
-      <th>Metall</th>
+    <th>Figur</th>
+    <th>Størrelse</th>
+    <th>Metall</th>
+    <th>Pris</th>
+    <th>Knapp</th>
   </tr>
   </thead>
   <!-- tbody som man kan skrive ut deler av tabellen via js -->
@@ -59,7 +62,7 @@
   
 
   var bestillinger = JSON.parse(localStorage.getItem("bestillinger"));
-  
+  	//Stig
   function drawTable(tbody) {
     var tr;
     var td;
@@ -69,6 +72,12 @@
     for (var i = 0; i < bestillinger.length; i++) {
       // legger til <tr></tr> i <tbody>
         tr = tbody.insertRow(tbody.rows.length);
+
+        // legger til <td> inn i <tr> 
+    td = tr.insertCell(tr.cells.length);
+    td.setAttribute("align", "center");
+        // legger informasjon fra arrayet inn i <td>
+        td.innerHTML = i;
 
         // legger til <td> inn i <tr> 
     td = tr.insertCell(tr.cells.length);
@@ -88,13 +97,24 @@
          // legger informasjon fra arrayet inn i <td>
     td.innerHTML = bestillinger[i].størrelse;
 
-        // legger til <td> inn i <tr> en
-        td = tr.insertCell(tr.cells.length);
-        td.setAttribute("align", "center");
-         // legger informasjon fra arrayet inn i <td>
-        td.innerHTML = bestillinger[i].metall;
+    // legger til <td> inn i <tr> en
+    td = tr.insertCell(tr.cells.length);
+    td.setAttribute("align", "center");
+    // legger informasjon fra arrayet inn i <td>
+    td.innerHTML = bestillinger[i].metall;
 
-       
+    // legger til <td> inn i <tr> en
+    td = tr.insertCell(tr.cells.length);
+    td.setAttribute("align", "center");
+    // legger informasjon fra arrayet inn i <td>
+    td.innerHTML = bestillinger[i].total_pris;
+
+    // legger til <td> inn i <tr> en
+    td = tr.insertCell(tr.cells.length);
+    td.setAttribute("align", "center");
+    // legger informasjon fra arrayet inn i <td>
+    td.innerHTML = "<button id='"+i+"' onclick='slettPers(this.id)'>Slett</button>";
+
     }
 
 }
@@ -102,10 +122,19 @@
   drawTable("matchData"); //Tegner tabellen
 
 
-      //Stig
-  function clearLS (){
-     localStorage.clear();
-     alert("Slettet localstorage");
+ 
+
+
+
+//Stig
+  function slettPers(clicked_id){
+  	
+  	bestillinger.splice(clicked_id,1);
+
+     localStorage.setItem('bestillinger', JSON.stringify(bestillinger));
+
+     drawTable("matchData");
+
   }
 
 
