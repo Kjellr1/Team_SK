@@ -14,7 +14,6 @@
           <li><a href="Index.html" >Index</a></li>
           <li><a href="bestilt.html">Bestilt</a></li>
           <li><a>Home3</a></li>
-          <li onclick="location.href='Settings.html';" style="float:right"><a id="cart">SETTINGS</a></li>
         </ul>
       </div>
       <div id="content">
@@ -70,7 +69,6 @@
 
 
     <script type="text/javascript">
-
       var b1 = ["bilder/Kuler/Kule_Gull.png",
                 "bilder/Kuler/Kule_Sølv.png",
                 "bilder/Kuler/Kule_Bronze.png",
@@ -91,7 +89,7 @@
                "bilder/Syliderer/Sylinder_Aluminium.png"];
 
 
-      var mvv = document.getElementById("input_metall").value;
+      var metall_value = document.getElementById("input_metall").value;
 
       var figur = "";
       var figur_cm = 0;
@@ -139,19 +137,19 @@
         var SelectMetal = e.options [e.selectedIndex] .value;
 
         if (figur == "Kule") {
-          if (metall == "Gull") {
+          if (metall_value == "Gull") {
             document.getElementById("img").src = b1[0];
           }
-          else if (metall == "Sølv") {
+          else if (metall_value == "Sølv") {
             document.getElementById("img").src = b1[1];
           }
-          else if (metall == "Bronze") {
+          else if (metall_value == "Bronze") {
             document.getElementById("img").src = b1[2];
           }
-          else if (metall == "Jern") {
+          else if (metall_value == "Jern") {
             document.getElementById("img").src = b1[3];
           }
-          else if (metall == "Aluminium") {
+          else if (metall_value == "Aluminium") {
             document.getElementById("img").src = b1[4];
           }
 
@@ -167,19 +165,19 @@
 
 
         else if (figur == "Kjegle") {
-          if (metall == "Gold") {
+          if (metall_value == "Gold") {
             document.getElementById("img").src = b2[0];
           }
-          else if (metall == "Sølv") {
+          else if (metall_value == "Sølv") {
             document.getElementById("img").src = b2[1];
           }
-          else if (metall == "Bronze") {
+          else if (metall_value == "Bronze") {
             document.getElementById("img").src = b2[2];
           }
-          else if (metall == "Jern") {
+          else if (metall_value == "Jern") {
             document.getElementById("img").src = b2[3];
           }
-          else if (metall == "Aluminium") {
+          else if (metall_value == "Aluminium") {
             document.getElementById("img").src = b2[4];
           }
 
@@ -195,19 +193,19 @@
 
 
         else if (figur == "Sylinder") {
-          if (metall == "Gull") {
+          if (metall_value == "Gull") {
             document.getElementById("img").src = b3[0];
           }
-          else if (metall == "Sølv") {
+          else if (metall_value == "Sølv") {
             document.getElementById("img").src = b3[1];
           }
-          else if (metall == "Bronze") {
+          else if (metall_value == "Bronze") {
             document.getElementById("img").src = b3[2];
           }
-          else if (metall == "Jern") {
+          else if (metall_value == "Jern") {
             document.getElementById("img").src = b3[3];
           }
-          else if (metall == "Aluminium") {
+          else if (metall_value == "Aluminium") {
             document.getElementById("img").src = b3[4];
           }
 
@@ -227,63 +225,55 @@
 
 
 
+    //STIG
+    //Informasjon
+    var navn = document.getElementById("input_kunde");
+    var størrelse = document.getElementById("input_størrelse");
+    var metall = document.getElementById("input_metall");
+    // var figur satt i funksjone over
+    var total_pris = 0;
 
-  //STIG
-  //Informasjon
-
-  var navn = document.getElementById("input_kunde");
-  var størrelse = document.getElementById("input_størrelse");
-  var metall = document.getElementById("input_metall");
-  // var figur satt i funksjone over
-  var total_pris = 5;
-  
-  var bestillinger = JSON.parse(localStorage.getItem("bestillinger"));
-  
-    //Stig
-   if(bestillinger == null){
-    var bestillinger = [];
-  } else {
     var bestillinger = JSON.parse(localStorage.getItem("bestillinger"));
-  }
-  // Stig
-   //Storage array
-  function jsonStructure(navn,størrelse,metall,figur){
-    this.navn = navn;
-    this.størrelse = størrelse;
-    this.metall = metall;
-    this.figur = figur;
-    this.total_pris = total_pris;
-  }
 
-  //Se at all informasjonen er fullt inn
-  //Stig
-  function dataSave(){
-    var isNull = navn.value != "" && størrelse.value != "" && metall.value != "" && figur.value != "";
-    if(isNull){
-      //legg til informasjonen i StorageArrayet og til localstorage
-      var obj = new jsonStructure(navn.value, størrelse.value, metall.value, figur, total_pris);
-      bestillinger.push(obj);
-      
-      localStorage.setItem('bestillinger', JSON.stringify(bestillinger));
-
-      alert("Lagret");
+      //Stig
+     if(bestillinger == null){
+      var bestillinger = [];
+    } else {
+      var bestillinger = JSON.parse(localStorage.getItem("bestillinger"));
     }
-    else{
-      alert("Du må fylle inn alle feltene");
+    // Stig
+     //Storage array
+    function jsonStructure(navn,størrelse,metall,figur){
+      this.navn = navn;
+      this.størrelse = størrelse + " cm";
+      this.metall = metall;
+      this.figur = figur;
+      this.total_pris = total_pris;
     }
-}
+    //Se at all informasjonen er fullt inn
+    //Stig
+    function dataSave(){
+      var isNull = navn.value != "" && størrelse.value != "" && metall.value != "" && figur.value != "";
+      if(isNull){
+        //legg til informasjonen i StorageArrayet og til localstorage
+        var obj = new jsonStructure(navn.value, størrelse.value, metall.value, figur, total_pris);
+        bestillinger.push(obj);
 
-
-
-
+        localStorage.setItem('bestillinger', JSON.stringify(bestillinger));
+        alert("Lagret");
+      }
+      else{
+        alert("Du må fylle inn alle feltene");
+      }
+  }
 
 
 
   function print(){
     cm = document.getElementById('input_størrelse').value;
     inncm = document.getElementById('input_størrelse').innerHTML;
+    metall_value = document.getElementById('input_metall').value;
     figur_cm = cm;
-    metall = document.getElementById('input_metall').value;
 
     if (figur == "") {
       FigurValg1()
@@ -307,7 +297,7 @@
     }
 
     if (metall != "") {
-      document.getElementById('metallpris').innerHTML = "Metall: " + metall + " [0 kr]";
+      document.getElementById('metallpris').innerHTML = "Metall: " + metall_value + " [" + MetallPris[metall_value] + " kr/pr.g]";
       utregning()
     }
 
@@ -316,43 +306,63 @@
     }
 
     if (figur == "Kule") {
-      document.getElementById('figurbestilling').innerHTML = "Figur: " + figur;
+      document.getElementById('figurbestilling').innerHTML = "Figur: " + FigurForm[0];
       utregning()
     }
 
     else if (figur == "Kjegle") {
-      document.getElementById('figurbestilling').innerHTML = "Figur: " + figur;
+      document.getElementById('figurbestilling').innerHTML = "Figur: " + FigurForm[1];
       utregning()
     }
 
     else if (figur == "Sylinder") {
-      document.getElementById('figurbestilling').innerHTML = "Figur: " + figur;
+      document.getElementById('figurbestilling').innerHTML = "Figur: " + FigurForm[2];
       utregning()
     }
+
+    else {
+
+    }
+
       b1function()
   }
 
 
+    function totalsum(){
+      if (total_pris == "NaN") {
+
+      }
+
+      else {
+        var sum = volum * MetallPris[metall_value] *  MetallTetthet[metall_value] + 1500;
+        total_pris = sum+" Kr";
+        document.getElementById('totalpris').innerHTML = "Total Pris:" + total_pris;
+      }
+    }
+
 
 
       function utregning(){
-
+        totalsum()
         if (figur == "Kule" && figur_cm >= 1) {
           var kule = (4 * Math.PI * (figur_cm/2) ** 3)/3;
-          var rund = Math.round(kule);
-          var volum = rund;
+          var rund = Math.ceil(kule);
+          volum = rund;
           document.getElementById('størrelsepris').innerHTML = "Størrelse: " + volum + " cm^3" + " [0 kr]";
         }
-        else if (figur == "Sylinder" && figur_cm >= 1) {
-          var sylinder = (Math.PI * (figur_cm/2) ** 2)*(figur_cm/2);
-          var rund = Math.round(sylinder);
-          var volum = rund;
-          document.getElementById('størrelsepris').innerHTML = "Størrelse: " + volum + " cm^3" + " [0 kr]";
-        }
+
         else if (figur == "Kjegle" && figur_cm >= 1){
-          var kjegle = (Math.PI * (figur_cm/2) ** 2)*(figur_cm/2) / 3;
-          var rund = Math.round(kjegle);
-          var volum = rund;
+          var kjegle = (Math.PI * (figur_cm/2) ** 2)*(figur_cm) / 3;
+          var rund = Math.ceil(kjegle);
+          volum = rund;
+          document.getElementById('størrelsepris').innerHTML = "Størrelse: " + volum + " cm^3" + " [0 kr]";
+
+        }
+
+        else if (figur == "Sylinder" && figur_cm >= 1) {
+          var sylinder = (Math.PI * (figur_cm/2) ** 2)*(figur_cm);
+          var rund = Math.ceil(sylinder);
+          volum = rund;
           document.getElementById('størrelsepris').innerHTML = "Størrelse: " + volum + " cm^3" + " [0 kr]";
         }
 
@@ -365,12 +375,5 @@
 
 
     </script>
-
-
-
-
-
-
-
   </body>
 </html>
