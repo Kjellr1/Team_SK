@@ -1,0 +1,188 @@
+body {
+}
+
+#ramme {
+  position: relative;
+  height: 95vh;
+  width: 70%;
+  margin-top: 1.5%;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #91a8ff;
+  border: 3px solid #333;
+}
+
+
+#menu ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+
+#menu ul li{
+  float: left;
+}
+
+
+#menu ul li a{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px 17px;
+  text-decoration: none;
+}
+
+
+#menu ul li a:hover{
+  background-color: #111;
+}
+
+
+#content {
+  width: 95%;
+  height: 86%;
+  margin-top: 2%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+#info {
+  margin-top: 10px;
+}
+
+
+#figur ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 3px solid #333;
+  background-color: #dde4ff;
+}
+
+
+#figur ul li{
+  float: left;
+}
+
+
+#figur ul li img{
+  width: 5vw;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px 17px;
+  text-decoration: none;
+}
+
+
+
+#figur ul li img:hover{
+  background-color: #cedfff;
+}
+
+
+
+#right {
+  margin-top: 15px;
+  float: right;
+  width: 33%;
+  height: 32vw;
+  border: 3px solid #333;
+  background-color: #dde4ff;
+}
+
+#right h2{
+  font-size: 1.5vw;
+  padding: 10px;
+}
+
+#right h1{
+  font-size: 2vw;
+  padding: 10px;
+}
+
+
+#left {
+  margin-top: 15px;
+  float: left;
+  width: 63%;
+  height: 32vw;
+  border: 3px solid #333;
+  background-color: #dde4ff;
+}
+
+
+#left img {
+  width: 50%;
+  display: block;
+  margin-top: 13%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#cart {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  background-color:#212121;
+}
+
+#DB_change {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  height: 77%;
+  width: 40%;
+  background-color: #dde4ff;
+
+}
+
+.DB_change_box {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8%;
+  height: 50px;
+  width: 300px;
+  background-color: white;
+  border: 3px solid #333;
+
+
+}
+
+.DB_change_left > input {
+ width: 50%;
+}
+
+#DB_change_top{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4%;
+  height: 50px;
+  width: 300px;
+  background-color: white;
+  border: 3px solid #333;
+}
+
+#DB_change_h1 {
+  color: white;
+  background-color: #333;
+  padding: 10px;
+  text-align: center;
+}
+
+
+.DB_change_left {
+  float: left;
+  width: 240px;
+  height: 50px;
+}
+
+.DB_change_right{
+  float: right;
+  height: 50px;
+  width: 60px;
+}
