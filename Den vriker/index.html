@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/master.css">
+    <script src="DB/DB.js"></script>
+    <title></title>
+  </head>
+  <body>
+
+    <div id="ramme">
+      <div id="menu">
+        <ul>
+          <li><a href="Index.html" >Index</a></li>
+          <li><a href="bestilt.html">Bestilt</a></li>
+          <li><a>Home3</a></li>
+        </ul>
+      </div>
+      <div id="content">
+
+        <div id="figur">
+          <ul>
+            <li onclick="FigurValg1()" id="b1knapp"><img src="bilder/Kuler/Kule_ico.png"></li>
+            <li onclick="FigurValg2()" id="b2knapp"><img src="bilder/Kjegler/Kjegle_ico.png"></li>
+            <li onclick="FigurValg3()" id="b3knapp"><img src="bilder/Syliderer/Sylinder_ico.png"></li>
+          </ul>
+        </div>
+
+        <div id="info">
+
+          <input id="input_kunde" type="text" name="kunde" class="kunde" value="" placeholder="Navn">
+
+          <input min="1" max="15" oninput="print()" id="input_størrelse" type="number" name="størrelse" value="0" placeholder="1-15cm">
+
+          <select onchange="print()" id="input_metall" >
+            <option value=""  disabled selected hidden>Velg materiell til figuren?</option>
+            <option value="Jern">Jern</option>
+            <option value="Bronze">Bronze</option>
+            <option value="Gull">Gull</option>
+            <option value="Sølv">Sølv</option>
+            <option value="Aluminium">Aluminium</option>
+          </select>
+
+              <input type="button" value="Save to LS" onclick="dataSave()">
+
+        </div>
+
+
+        <div id="right">
+          <h1 id="bestilling">Kunde bestilling</h1>
+          <h2 id="figurbestilling">Figur:__________________ </h2>
+          <h2 id="størrelsepris">Størrelse:_______________</h2>
+          <h2 id="metallpris">Metal:__________________ </h2>
+          <h2>Forming: Stander [1500kr] </h2>
+          <h2 id="totalpris">Total Pris:</h2>
+        </div>
+
+        <div id="left">
+          <img id="img" src="bilder/blank.png">
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <script type="text/javascript">
+      var b1 = ["bilder/Kuler/Kule_Gull.png",
+                "bilder/Kuler/Kule_Sølv.png",
+                "bilder/Kuler/Kule_Bronze.png",
+                "bilder/Kuler/Kule_Jern.png",
+                "bilder/Kuler/Kule_Aluminium.png",
+                "bilder/Kuler/Kule_Tom.png"];
+
+      var b2 = ["bilder/Kjegler/Kjegle_Gull.png",
+                "bilder/Kjegler/Kjegle_Sølv.png",
+                "bilder/Kjegler/Kjegle_Bronze.png",
+                "bilder/Kjegler/Kjegle_Jern.png",
+                "bilder/Kjegler/Kjegle_Aluminium.png",
+                "bilder/Kjegler/Kjegle_Tom.png",];
+
+
+     var b3 = ["bilder/Syliderer/Sylinder_Gull.png",
+               "bilder/Syliderer/Sylinder_Sølv.png",
+               "bilder/Syliderer/Sylinder_Bronze.png",
+               "bilder/Syliderer/Sylinder_Jern.png",
+               "bilder/Syliderer/Sylinder_Aluminium.png",
+               "bilder/Syliderer/Sylinder_Tom.png"  ];
+
+
+      var metall_value = document.getElementById("input_metall").value;
+
+      var figur = "";
+      var figur_cm = 0;
+      var volum = 0;
+      var pris = 0;
+
+
+      //Kjell Reidar
+      /*Hær finner du 3 funcioner, disse bytter ut bildene og kjører, 3 andre
+      forskjellige function som utreining og printing, som blir forklart seperart*/
+      function FigurValg1(){
+        document.getElementById('b1knapp').style.backgroundColor = "#c7ccff";
+        document.getElementById('b2knapp').style.backgroundColor = "#dde4ff";
+        document.getElementById('b3knapp').style.backgroundColor = "#dde4ff";
+
+        figur = "Kule";
+        print()
+        utregning()
+        b1function()
+      }
+
+
+      function FigurValg2(){
+        document.getElementById('b1knapp').style.backgroundColor = "#dde4ff";
+        document.getElementById('b2knapp').style.backgroundColor = "#c7ccff";
+        document.getElementById('b3knapp').style.backgroundColor = "#dde4ff";
+
+        figur = "Kjegle";
+        print()
+        utregning()
+        b1function()
+      }
+      function FigurValg3(){
+        document.getElementById('b1knapp').style.backgroundColor = "#dde4ff";
+        document.getElementById('b2knapp').style.backgroundColor = "#dde4ff";
+        document.getElementById('b3knapp').style.backgroundColor = "#c7ccff";
+
+        figur = "Sylinder";
+        print()
+        utregning()
+        b1function()
+      }
+
+      //Kjell
+      /*Henter bildene fra 3 arrays (en for hvær figur). Printer ut
+      et bilde for å illustrere, hva som blir laget.*/
+      function b1function(){
+        var e = document.getElementById ("input_metall");
+        var SelectMetal = e.options [e.selectedIndex] .value;
+
+        if (figur == "Kule") {
+          if (metall_value == "Gull") {
+            document.getElementById("img").src = b1[0];
+          }
+          else if (metall_value == "Sølv") {
+            document.getElementById("img").src = b1[1];
+          }
+          else if (metall_value == "Bronze") {
+            document.getElementById("img").src = b1[2];
+          }
+          else if (metall_value == "Jern") {
+            document.getElementById("img").src = b1[3];
+          }
+          else if (metall_value == "Aluminium") {
+            document.getElementById("img").src = b1[4];
+          }
+
+          else {
+            document.getElementById("img").src = b1[5];
+          }
+        }
+
+
+
+
+
+
+
+        else if (figur == "Kjegle") {
+          if (metall_value == "Gull") {
+            document.getElementById("img").src = b2[0];
+          }
+          else if (metall_value == "Sølv") {
+            document.getElementById("img").src = b2[1];
+          }
+          else if (metall_value == "Bronze") {
+            document.getElementById("img").src = b2[2];
+          }
+          else if (metall_value == "Jern") {
+            document.getElementById("img").src = b2[3];
+          }
+          else if (metall_value == "Aluminium") {
+            document.getElementById("img").src = b2[4];
+          }
+
+          else {
+            document.getElementById("img").src = b2[5];
+          }
+        }
+
+
+
+
+
+
+
+        else if (figur == "Sylinder") {
+          if (metall_value == "Gull") {
+            document.getElementById("img").src = b3[0];
+          }
+          else if (metall_value == "Sølv") {
+            document.getElementById("img").src = b3[1];
+          }
+          else if (metall_value == "Bronze") {
+            document.getElementById("img").src = b3[2];
+          }
+          else if (metall_value == "Jern") {
+            document.getElementById("img").src = b3[3];
+          }
+          else if (metall_value == "Aluminium") {
+            document.getElementById("img").src = b3[4];
+          }
+
+          else {
+            document.getElementById("img").src = b3[5];
+          }
+        }
+
+      }
+
+
+    </script>
+    <script>
+
+
+
+
+
+
+    //STIG
+    //Informasjon
+    var navn = document.getElementById("input_kunde");
+    var størrelse = document.getElementById("input_størrelse");
+    var metall = document.getElementById("input_metall");
+    // var figur satt i funksjone over
+    var total_pris = 0;
+
+    var bestillinger = JSON.parse(localStorage.getItem("bestillinger"));
+
+      //Stig
+     if(bestillinger == null){
+      var bestillinger = [];
+    } else {
+      var bestillinger = JSON.parse(localStorage.getItem("bestillinger"));
+    }
+    // Stig
+     //Storage array
+    function jsonStructure(navn,størrelse,metall,figur){
+      this.navn = navn;
+      this.størrelse = størrelse + " cm";
+      this.metall = metall;
+      this.figur = figur;
+      this.total_pris = total_pris;
+    }
+    //Se at all informasjonen er fullt inn
+    //Stig
+    function dataSave(){
+      var isNull = navn.value != "" && størrelse.value != "" && metall.value != "" && figur.value != "";
+      if(isNull){
+        //legg til informasjonen i StorageArrayet og til localstorage
+        var obj = new jsonStructure(navn.value, størrelse.value, metall.value, figur, total_pris);
+        bestillinger.push(obj);
+
+        localStorage.setItem('bestillinger', JSON.stringify(bestillinger));
+        alert("Lagret");
+      }
+      else{
+        alert("Du må fylle inn alle feltene");
+      }
+  }
+
+
+  //Kjell Reidar
+  /*Dette er en function som printer ut allt */
+  function print(){
+    cm = document.getElementById('input_størrelse').value;
+    inncm = document.getElementById('input_størrelse').innerHTML;
+    inncm = document.getElementById('input_størrelse');
+    metall_value = document.getElementById('input_metall').value;
+    var e = document.getElementById ("input_metall");
+    var SelectMetal = e.options [e.selectedIndex] .value;
+    figur_cm = cm;
+
+    if (figur == "") {
+      FigurValg1()
+    }
+
+    else {
+
+    }
+
+
+
+
+    /*Ser om prisen som er git er høgere en 15. Hvis den er det send en
+     alert, deretter set value av input til 15. Hvis den er under 15 kjøre utreinings functionen*/
+    if (figur_cm >= 16) {
+      alert(cm + " Er ikke en verifisert størelse, Cm sat til 15")
+      figur_cm = '15';
+      utregning()
+    }
+
+    else if (figur_cm >= 1) {
+      utregning()
+    }
+
+    else {
+
+    }
+
+
+
+    //Printer ut hva metall som er valgt, og pris per gram fra DB.js
+    if (SelectMetal != "") {
+      document.getElementById('metallpris').innerHTML = "Metall: " + metall_value + " [" + MetallPris[metall_value] + " kr/pr.g]";
+      utregning()
+    }
+
+    else {
+
+    }
+
+    //Printer ut Figur navn
+    if (figur == "Kule") {
+      document.getElementById('figurbestilling').innerHTML = "Figur: " + FigurForm[0];
+      utregning()
+    }
+
+    else if (figur == "Kjegle") {
+      document.getElementById('figurbestilling').innerHTML = "Figur: " + FigurForm[1];
+      utregning()
+    }
+
+    else if (figur == "Sylinder") {
+      document.getElementById('figurbestilling').innerHTML = "Figur: " + FigurForm[2];
+      utregning()
+    }
+
+    else {
+
+    }
+
+      b1function()
+  }
+
+    //Kjell Reidar
+    /* Dette er funksjonen som, rekner ut hvor mye det vil koste for en figur, den ganger
+        Volumet med metal prisen som finnes i DB.js og Tettheten til de forskjellige metallene
+        som også finnes i DB.js (If prisen er "NaN kr" ikke print ut noe, fordi det er ikke vits)*/
+    function totalsum(){
+      var sum = volum * MetallPris[metall_value] *  MetallTetthet[metall_value] + 1500;
+      total_pris = sum + " Kr";
+      if (total_pris == "NaN Kr") {
+
+      }
+
+      else {
+        document.getElementById('totalpris').innerHTML = "Total Pris: " + total_pris;
+      }
+    }
+
+
+
+      function utregning(){
+        totalsum()
+        if (figur == "Kule" && figur_cm >= 1) {
+          var kule = (4 * Math.PI * (figur_cm/2) ** 3)/3;
+          var rund = Math.ceil(kule);
+          volum = rund;
+          document.getElementById('størrelsepris').innerHTML = "Størrelse: " + volum + " cm^3" + " [0 kr]";
+        }
+
+        else if (figur == "Kjegle" && figur_cm >= 1){
+          var kjegle = (Math.PI * (figur_cm/2) ** 2)*(figur_cm) / 3;
+          var rund = Math.ceil(kjegle);
+          volum = rund;
+          document.getElementById('størrelsepris').innerHTML = "Størrelse: " + volum + " cm^3" + " [0 kr]";
+
+        }
+
+        else if (figur == "Sylinder" && figur_cm >= 1) {
+          var sylinder = (Math.PI * (figur_cm/2) ** 2)*(figur_cm);
+          var rund = Math.ceil(sylinder);
+          volum = rund;
+          document.getElementById('størrelsepris').innerHTML = "Størrelse: " + volum + " cm^3" + " [0 kr]";
+        }
+
+        else {
+
+        }
+
+      }
+
+
+
+    </script>
+  </body>
+</html>
